@@ -17,7 +17,6 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
 
   CLAuthorizationStatus autorizationStatus =
       [CLLocationManager authorizationStatus];
@@ -32,32 +31,27 @@
     if (autorizationStatus == kCLAuthorizationStatusNotDetermined) {
       [self.locationManager requestAlwaysAuthorization];
     } else {
-      self.locationManager.allowsBackgroundLocationUpdates = YES;
-      [self.locationManager startUpdatingLocation];
+      [self trk_startUpdatingLocation];
     }
   }
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
-// pragma - mark LocationManagerDelegate
+#pragma - mark LocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager
     didChangeAuthorizationStatus:(CLAuthorizationStatus)autorizationStatus {
 
   NSLog(@"Authorization status updated");
   if (autorizationStatus == kCLAuthorizationStatusAuthorizedAlways) {
-    self.locationManager.allowsBackgroundLocationUpdates = YES;
-    [self.locationManager startUpdatingLocation];
+    [self trk_startUpdatingLocation];
   }
 }
 
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray<CLLocation *> *)locations {
-
-  NSLog(@"Location updated");
 
   [locations enumerateObjectsUsingBlock:^(CLLocation *__nonnull location,
                                           NSUInteger idx,
@@ -72,6 +66,12 @@
     [Client updateLocationWithCoordinates:coordinates];
 
   }];
+}
+
+- (void)trk_startUpdatingLocation {
+  self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+  self.locationManager.allowsBackgroundLocationUpdates = YES;
+  [self.locationManager startUpdatingLocation];
 }
 
 @end
