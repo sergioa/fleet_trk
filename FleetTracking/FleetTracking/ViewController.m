@@ -66,8 +66,8 @@
     NSLog(@"latitude: %f longitude: %f", coordinates.latitude,
           coordinates.longitude);
 
-    [self.mapView setRegion:MKCoordinateRegionMake(
-                                coordinates, MKCoordinateSpanMake(1.0, 1.0))];
+    [self.mapView
+        setRegion:MKCoordinateRegionMakeWithDistance(coordinates, 500, 500)];
 
     [Client updateLocationWithCoordinates:coordinates];
 
