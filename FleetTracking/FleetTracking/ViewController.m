@@ -40,7 +40,7 @@
   [super didReceiveMemoryWarning];
 }
 
-#pragma - mark LocationManagerDelegate
+#pragma - mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager
     didChangeAuthorizationStatus:(CLAuthorizationStatus)autorizationStatus {
 
@@ -60,12 +60,46 @@
     NSLog(@"latitude: %f longitude: %f", coordinates.latitude,
           coordinates.longitude);
 
+    [self trk_addAnnotation:coordinates];
+
     [self.mapView
         setRegion:MKCoordinateRegionMakeWithDistance(coordinates, 500, 500)];
 
     [Client updateLocationWithCoordinates:coordinates];
 
   }];
+}
+
+#pragma - mark MKMapViewDelegate
+- (MKAnnotationView *)mapView:(MKMapView *)mapView
+            viewForAnnotation:(id<MKAnnotation>)annotation {
+
+  MKAnnotationView *annotationView = (MKAnnotationView *)[self.mapView
+      dequeueReusableAnnotationViewWithIdentifier:@"AnnotationViewId"];
+
+  if (!annotationView) {
+    annotationView =
+        [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                     reuseIdentifier:@"AnnotationViewId"];
+
+  } else {
+    annotationView.annotation = annotation;
+  }
+
+  return annotationView;
+}
+
+#pragma - mark Private methods
+
+- (void)trk_addAnnotation:(CLLocationCoordinate2D)coordinates {
+  MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+  annotation.title = @"user";
+  annotation.subtitle =
+      [NSString stringWithFormat:@"lat:%f,lon:%f", coordinates.latitude,
+                                 coordinates.longitude];
+  annotation.coordinate = coordinates;
+
+  [self.mapView addAnnotation:annotation];
 }
 
 - (void)trk_startUpdatingLocation {
