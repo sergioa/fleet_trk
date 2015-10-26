@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "Client.h"
 
+#define kDistanceFilter 50.0
+
 @interface ViewController ()
 
 @end
@@ -70,7 +72,7 @@
 
 - (void)trk_startUpdatingLocation {
   self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-  self.locationManager.distanceFilter = 50.0;
+  self.locationManager.distanceFilter = kDistanceFilter;
   self.locationManager.allowsBackgroundLocationUpdates = YES;
   [self.locationManager startUpdatingLocation];
 }
