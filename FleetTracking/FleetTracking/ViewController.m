@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Client.h"
 
 @interface ViewController ()
 
@@ -62,6 +63,8 @@
         CLLocationCoordinate2D coordinates = location.coordinate;
         NSLog(@"latitude: %f longitude: %f", coordinates.latitude,
               coordinates.longitude);
+
+        [Client updateLocationWithCoordinates:coordinates];
 
       }];
 }
