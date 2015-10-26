@@ -9,7 +9,8 @@
 #import "Client.h"
 #import <AFHTTPRequestOperationManager.h>
 
-#define kApiRoot @"http://example.com/resources.json"
+#define uid @"1"
+#define secret @"artero"
 
 @interface Client ()
 
@@ -18,22 +19,37 @@
 @implementation Client
 
 + (void)updateLocationWithCoordinates:(CLLocationCoordinate2D)coord {
+
+  NSString *url =
+      [NSString stringWithFormat:@"https://www.ootoyasushi.com/"
+                                 @"index.php?fc=module&module=deliverytracking&"
+                                 @"controller=bikepositions&updatePosition&id=%"
+                                 @"@&token=%@&lat=%f&lng=%f",
+                                 uid, secret, coord.latitude, coord.longitude];
+
   AFHTTPRequestOperationManager *manager =
       [AFHTTPRequestOperationManager manager];
 
-  NSDictionary *parameters = @{
-    @"longitude" : @(coord.longitude),
-    @"latitude" : @(coord.latitude)
-  };
+  [manager setSecurityPolicy:[self trk_securityPolicy]];
 
-  [manager POST:kApiRoot
-      parameters:parameters
+  [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
+  [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+
+  [manager GET:url
+      parameters:nil
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
       }];
+}
+
++ (AFSecurityPolicy *)trk_securityPolicy {
+  AFSecurityPolicy *securityPolicy =
+      [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+  [securityPolicy setAllowInvalidCertificates:YES];
+  [securityPolicy setValidatesDomainName:NO];
+  return securityPolicy;
 }
 
 @end

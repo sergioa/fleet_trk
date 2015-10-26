@@ -32,6 +32,7 @@
     if (autorizationStatus == kCLAuthorizationStatusNotDetermined) {
       [self.locationManager requestAlwaysAuthorization];
     } else {
+      self.locationManager.allowsBackgroundLocationUpdates = YES;
       [self.locationManager startUpdatingLocation];
     }
   }
@@ -48,6 +49,7 @@
 
   NSLog(@"Authorization status updated");
   if (autorizationStatus == kCLAuthorizationStatusAuthorizedAlways) {
+    self.locationManager.allowsBackgroundLocationUpdates = YES;
     [self.locationManager startUpdatingLocation];
   }
 }
@@ -57,16 +59,19 @@
 
   NSLog(@"Location updated");
 
-  [locations
-      enumerateObjectsUsingBlock:^(CLLocation *__nonnull location,
-                                   NSUInteger idx, BOOL *__nonnull stop) {
-        CLLocationCoordinate2D coordinates = location.coordinate;
-        NSLog(@"latitude: %f longitude: %f", coordinates.latitude,
-              coordinates.longitude);
+  [locations enumerateObjectsUsingBlock:^(CLLocation *__nonnull location,
+                                          NSUInteger idx,
+                                          BOOL *__nonnull stop) {
+    CLLocationCoordinate2D coordinates = location.coordinate;
+    NSLog(@"latitude: %f longitude: %f", coordinates.latitude,
+          coordinates.longitude);
 
-        [Client updateLocationWithCoordinates:coordinates];
+    [self.mapView setRegion:MKCoordinateRegionMake(
+                                coordinates, MKCoordinateSpanMake(1.0, 1.0))];
 
-      }];
+    [Client updateLocationWithCoordinates:coordinates];
+
+  }];
 }
 
 @end

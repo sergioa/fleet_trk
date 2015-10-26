@@ -17,6 +17,7 @@
 		49322E001BDE66600023FFA9 /* FleetTrackingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49322DFF1BDE66600023FFA9 /* FleetTrackingUITests.m */; };
 		49322E0E1BDE66D10023FFA9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49322E0D1BDE66D10023FFA9 /* CoreLocation.framework */; };
 		49322E101BDE79490023FFA9 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 49322E0F1BDE79490023FFA9 /* Client.m */; };
+		497AC5271BDE7DC100876FC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497AC5261BDE7DC100876FC5 /* MapKit.framework */; };
 		62D7D035EC021169D68F337B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB656DA2A52A57E7E7943D51 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		49322E0D1BDE66D10023FFA9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		49322E0F1BDE79490023FFA9 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		497AC5251BDE79AD00876FC5 /* Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		497AC5261BDE7DC100876FC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6A38C9ECE934D1039988062A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BB656DA2A52A57E7E7943D51 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA2BD0E391B019B9A268821 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497AC5271BDE7DC100876FC5 /* MapKit.framework in Frameworks */,
 				49322E0E1BDE66D10023FFA9 /* CoreLocation.framework in Frameworks */,
 				62D7D035EC021169D68F337B /* libPods.a in Frameworks */,
 			);
@@ -168,6 +171,7 @@
 		80E0123345C7949BD40DF65D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				497AC5261BDE7DC100876FC5 /* MapKit.framework */,
 				BB656DA2A52A57E7E7943D51 /* libPods.a */,
 			);
 			name = Frameworks;
